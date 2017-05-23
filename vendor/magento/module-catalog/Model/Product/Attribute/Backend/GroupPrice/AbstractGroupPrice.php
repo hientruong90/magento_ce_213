@@ -379,6 +379,7 @@ abstract class AbstractGroupPrice extends Price
                     'all_groups' => $useForAllGroups ? 1 : 0,
                     'customer_group_id' => $customerGroupId,
                     'value' => $data['price'],
+                    'cost' => $data['cost'],
                 ],
                 $this->_getAdditionalUniqueFields($data)
             );
@@ -419,6 +420,13 @@ abstract class AbstractGroupPrice extends Price
 
                     $isChanged = true;
                 }
+                if ($old[$k]['cost'] != $v['cost']) {
+                    $cost = new \Magento\Framework\DataObject(['value_id' => $old[$k]['price_id'], 'cost' => $v['cost']]);
+                    $this->_getResource()->savePriceData($cost);
+
+                    $isChanged = true;
+                }
+
             }
         }
 

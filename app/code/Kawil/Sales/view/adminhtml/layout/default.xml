@@ -14,6 +14,7 @@
                 <item name="tax-percent" xsi:type="string" translate="false">col-tax-percent</item>
                 <item name="discont" xsi:type="string" translate="false">col-discont</item>
                 <item name="total" xsi:type="string" translate="false">col-total</item>
+                <item name="cost" xsi:type="string" translate="false">col-cost</item>
                 <item name="kawil_lieferant" xsi:type="string" translate="false">col-kawil_lieferant</item>
                 <item name="kawil_alternative_lieferantent" xsi:type="string" translate="false">col-kawil_alternative_lieferantent</item>
             </argument>

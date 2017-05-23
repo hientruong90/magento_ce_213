@@ -501,6 +501,23 @@ class AdvancedPricing extends AbstractModifier
                                 ],
                             ],
                         ],
+                        'cost' => [
+                            'arguments' => [
+                                'data' => [
+                                    'config' => [
+                                        'componentType' => Field::NAME,
+                                        'formElement' => Input::NAME,
+                                        'dataType' => Price::NAME,
+                                        'label' => __('Cost'),
+                                        'enableLabel' => true,
+                                        'dataScope' => 'cost',
+                                        'addbefore' => $this->locator->getStore()
+                                                                     ->getBaseCurrency()
+                                                                     ->getCurrencySymbol(),
+                                    ],
+                                ],
+                            ],
+                        ],
                         'actionDelete' => [
                             'arguments' => [
                                 'data' => [

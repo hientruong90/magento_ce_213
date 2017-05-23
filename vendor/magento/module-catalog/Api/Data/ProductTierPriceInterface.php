@@ -81,4 +81,8 @@ interface ProductTierPriceInterface extends ExtensibleDataInterface
     public function setExtensionAttributes(
         \Magento\Catalog\Api\Data\ProductTierPriceExtensionInterface $extensionAttributes
     );
+
+    public function setCost($cost);
+
+    public function getCost();
 }

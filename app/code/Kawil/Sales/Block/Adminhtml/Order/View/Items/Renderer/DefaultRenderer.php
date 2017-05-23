@@ -65,6 +65,9 @@ class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Re
             case 'discont':
                 $html = $this->displayPriceAttribute('discount_amount');
                 break;
+            case 'cost':
+                $html = $this->getCostOfTierPrice($item);
+                break;
             case 'kawil_lieferant':
                 $lieferantProduct = $this->lieferantOptions->getLabelOfOption($item->getProduct()->getData('kawil_lieferant'));
                 $html = $lieferantProduct;
@@ -91,5 +94,23 @@ class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Re
             }
         }
         return $columns;
+    }
+
+    /**
+     * @param \Magento\Framework\DataObject|Item $item
+     */
+    public function getCostOfTierPrice($item){
+        $qtyOrdered = $item->getQtyOrdered();
+        $tierPrices = $item->getProduct()->getTierPrices();
+        $cost = $item->getPrice();
+        foreach ($tierPrices as $tierPrice){
+            if($qtyOrdered >= $tierPrice->getQty()){
+                if($tierPrice->getCost()) {
+                    $cost = $tierPrice->getCost();
+                }
+            }
+        }
+        return $this->displayRoundedPrices($cost,$cost,$this->getOrder()->getRowTaxDisplayPrecision());
+
     }
 }

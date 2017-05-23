@@ -97,4 +97,14 @@ class TierPrice extends \Magento\Framework\Model\AbstractExtensibleModel impleme
     ) {
         return $this->_setExtensionAttributes($extensionAttributes);
     }
+
+    public function setCost($cost)
+    {
+        $this->setData('cost',$cost);
+    }
+
+    public function getCost()
+    {
+        return $this->getData('cost');
+    }
 }

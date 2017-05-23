@@ -363,6 +363,7 @@ class Price
             }
             $tierPrice->setValue($value);
             $tierPrice->setQty($price['price_qty']);
+            $tierPrice->setCost($price['cost']);
             $prices[] = $tierPrice;
         }
         return $prices;

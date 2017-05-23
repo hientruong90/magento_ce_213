@@ -13,6 +13,7 @@
             </action>
             <arguments>
                 <argument name="columns" xsi:type="array">
+                    <item name="cost" xsi:type="string" translate="true">Cost</item>
                     <item name="kawil_lieferant" xsi:type="string" translate="true">Lieferant</item>
                     <item name="kawil_alternative_lieferantent" xsi:type="string" translate="true">Alternative Lieferanten</item>
                 </argument>

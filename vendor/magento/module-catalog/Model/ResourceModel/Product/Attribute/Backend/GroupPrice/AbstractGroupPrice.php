@@ -30,6 +30,7 @@ abstract class AbstractGroupPrice extends \Magento\Framework\Model\ResourceModel
             'all_groups' => 'all_groups',
             'cust_group' => 'customer_group_id',
             'price' => 'value',
+            'cost' => 'cost',
         ];
 
         $columns = $this->_loadPriceDataColumns($columns);
