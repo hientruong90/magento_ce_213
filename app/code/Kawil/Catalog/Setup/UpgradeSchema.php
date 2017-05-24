@@ -21,7 +21,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $connection->addColumn($table,
                     'cost',
                     [
-                        'type' => Table::TYPE_INTEGER,
+                        'type' => Table::TYPE_DECIMAL,
+                        'length' => '12,4',
                         null,
                         'comment' => 'COST',
                         'after' => 'website_id',

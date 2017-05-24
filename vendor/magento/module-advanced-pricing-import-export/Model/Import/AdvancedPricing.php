@@ -33,6 +33,8 @@ class AdvancedPricing extends \Magento\ImportExport\Model\Import\Entity\Abstract
 
     const COL_TIER_PRICE = 'tier_price';
 
+    const COL_TIER_COST = 'tier_cost';
+
     const TABLE_TIER_PRICE = 'catalog_product_entity_tier_price';
 
     const DEFAULT_ALL_GROUPS_GROUPED_PRICE_VALUE = '0';
@@ -80,6 +82,7 @@ class AdvancedPricing extends \Magento\ImportExport\Model\Import\Entity\Abstract
         self::COL_TIER_PRICE_CUSTOMER_GROUP,
         self::COL_TIER_PRICE_QTY,
         self::COL_TIER_PRICE,
+        self::COL_TIER_COST,
     ];
 
     /**
@@ -380,7 +383,8 @@ class AdvancedPricing extends \Magento\ImportExport\Model\Import\Entity\Abstract
                         ),
                         'qty' => $rowData[self::COL_TIER_PRICE_QTY],
                         'value' => $rowData[self::COL_TIER_PRICE],
-                        'website_id' => $this->getWebsiteId($rowData[self::COL_TIER_PRICE_WEBSITE])
+                        'website_id' => $this->getWebsiteId($rowData[self::COL_TIER_PRICE_WEBSITE]),
+                        'cost' => $rowData[self::COL_TIER_COST]
                     ];
                 }
             }
@@ -429,7 +433,7 @@ class AdvancedPricing extends \Magento\ImportExport\Model\Import\Entity\Abstract
                 }
             }
             if ($priceIn) {
-                $this->_connection->insertOnDuplicate($tableName, $priceIn, ['value']);
+                $this->_connection->insertOnDuplicate($tableName, $priceIn, ['value','cost']);
             }
         }
         return $this;

@@ -76,6 +76,7 @@ class AdvancedPricing extends \Magento\CatalogImportExport\Model\Export\Product
         ImportAdvancedPricing::COL_TIER_PRICE_CUSTOMER_GROUP => '',
         ImportAdvancedPricing::COL_TIER_PRICE_QTY => '',
         ImportAdvancedPricing::COL_TIER_PRICE => '',
+        ImportAdvancedPricing::COL_TIER_COST => '',
     ];
 
     /**
@@ -336,6 +337,7 @@ class AdvancedPricing extends \Magento\CatalogImportExport\Model\Export\Product
                 ImportAdvancedPricing::COL_TIER_PRICE_CUSTOMER_GROUP => 'ap.customer_group_id',
                 ImportAdvancedPricing::COL_TIER_PRICE_QTY => 'ap.qty',
                 ImportAdvancedPricing::COL_TIER_PRICE => 'ap.value',
+                ImportAdvancedPricing::COL_TIER_COST => 'ap.cost',
             ];
             if (isset($exportFilter) && !empty($exportFilter)) {
                 $price = $exportFilter['tier_price'];
