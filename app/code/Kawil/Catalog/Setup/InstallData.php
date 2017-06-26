@@ -36,7 +36,7 @@ class InstallData implements InstallDataInterface
                 'input' => 'select',
                 'visible' => true,
                 'user_defined' => true,
-                'source' => 'Kawil\Catalog\Model\Product\Attribute\Source\Lieferant',
+                'source' => '',
                 'required' => false,
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_WEBSITE,
                 'used_in_product_listing' => true,
@@ -45,6 +45,13 @@ class InstallData implements InstallDataInterface
                 'is_used_in_grid' => false,
                 'is_visible_in_grid' => false,
                 'is_filterable_in_grid' => false,
+                'option'     => array (
+                    'values' => array(
+                        0 => 'Small',
+                        1 => 'Medium',
+                        2 => 'Large',
+                    )
+                ),
             ]
         );
         $eavSetup->addAttribute(
@@ -57,7 +64,7 @@ class InstallData implements InstallDataInterface
                 'visible' => true,
                 'user_defined' => true,
                 'backend' => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
-                'source' => 'Kawil\Catalog\Model\Product\Attribute\Source\Lieferant',
+                'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_WEBSITE,
                 'required' => false,
                 'used_in_product_listing' => true,
@@ -66,6 +73,13 @@ class InstallData implements InstallDataInterface
                 'is_used_in_grid' => false,
                 'is_visible_in_grid' => false,
                 'is_filterable_in_grid' => false,
+                'option'     => array (
+                    'values' => array(
+                        0 => 'Small',
+                        1 => 'Medium',
+                        2 => 'Large',
+                    )
+                ),
             ]
         );
 

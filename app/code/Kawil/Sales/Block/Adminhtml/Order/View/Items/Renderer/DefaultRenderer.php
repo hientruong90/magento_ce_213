@@ -12,8 +12,14 @@ use Magento\Sales\Model\Order\Item;
  */
 class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer
 {
-
+    /**
+     * @var \Kawil\Catalog\Model\Product\Attribute\Source\Lieferant
+     */
     protected $lieferantOptions;
+    /**
+     * @var \Magento\Eav\Model\Config
+     */
+    protected $eavConfig;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -23,10 +29,12 @@ class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Re
         \Magento\GiftMessage\Helper\Message $messageHelper,
         \Magento\Checkout\Helper\Data $checkoutHelper,
         \Kawil\Catalog\Model\Product\Attribute\Source\Lieferant $lieferant,
+        \Magento\Eav\Model\Config $eavConfig,
         array $data = []
     )
     {
         $this->lieferantOptions = $lieferant;
+        $this->eavConfig = $eavConfig;
         parent::__construct($context, $stockRegistry, $stockConfiguration, $registry, $messageHelper, $checkoutHelper, $data);
     }
 
@@ -69,11 +77,11 @@ class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Re
                 $html = $this->getCostOfTierPrice($item);
                 break;
             case 'kawil_lieferant':
-                $lieferantProduct = $this->lieferantOptions->getLabelOfOption($item->getProduct()->getData('kawil_lieferant'));
+                $lieferantProduct = $this->getLabelOfOption($item->getProduct()->getData('kawil_lieferant'),'kawil_lieferant');
                 $html = $lieferantProduct;
                 break;
             case 'kawil_alternative_lieferantent':
-                $altLieferantProduct = $this->lieferantOptions->getLabelOfOption($item->getProduct()->getData('kawil_alternative_lieferantent'));
+                $altLieferantProduct = $this->getLabelOfOption($item->getProduct()->getData('kawil_alternative_lieferantent'),'kawil_alternative_lieferantent');
                 $html =$altLieferantProduct;
                 break;
             default:
@@ -112,5 +120,30 @@ class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Re
         }
         return $this->displayRoundedPrices($cost,$cost,$this->getOrder()->getRowTaxDisplayPrecision());
 
+    }
+    /**
+     * Get label of option (s)
+     *
+     * @param $value
+     * @return mixed|null
+     */
+    public function getLabelOfOption($value,$attributeCode){
+        if(is_null($value)){
+            return null;
+        }
+        $attribute = $this->eavConfig->getAttribute('catalog_product', $attributeCode);
+        $options = $attribute->getSource()->getAllOptions();
+        $values = explode(',', $value);
+        $arrOption = [];
+        foreach ($options as $option) {
+            if(!($option['label'] == "" and $option['value'] == "")){
+                $arrOption[$option['value']] = $option['label'];
+            }
+        }
+        $result = array_intersect_key($arrOption, array_flip($values));
+        if(is_array($result)){
+            return implode(', ',$result);
+        }
+        return null;
     }
 }
